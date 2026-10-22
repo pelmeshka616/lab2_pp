@@ -34,3 +34,24 @@ def find_in_url(url: str) -> list[str]:
     resp.raise_for_status()
     return find_passports(resp.text)
  
+
+def main() -> None:
+    print("1 - найти в строке\n2 - найти в файле\n3 - найти на веб-странице")
+    choice = input("Выбор: ").strip()
+    if choice == "1":
+        s = input("Введите серию и номер: ")
+        if is_valid_passport(s):
+            print("Корректные паспортные данные")
+        else:
+            print("Некорректные паспортные данные!")
+
+    elif choice == "2":
+        print(find_in_file(input("Путь к файлу: ").strip()))
+    elif choice == "3":
+        print(find_in_url(input("URL: ").strip()))
+    else:
+        sys.exit("Неизвестный пункт меню")
+ 
+ 
+if __name__ == "__main__":
+    main()
